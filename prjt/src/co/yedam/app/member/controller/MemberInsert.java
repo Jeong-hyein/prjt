@@ -85,7 +85,6 @@ public class MemberInsert extends HttpServlet {
 		String contextPath = getServletContext().getContextPath();
 		response.sendRedirect(contextPath + "/MemberList.do");
 //		request.getRequestDispatcher("/MemberList.do").forward(request, response);
-
 		
 	}
 	

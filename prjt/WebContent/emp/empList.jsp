@@ -7,7 +7,7 @@
 <head>
 <title> prjt/empList.jsp </title>
 <jsp:include page ="/common/header.jsp" />
-
+<div><a href="EmpInsert.do">사원 등록</a>
 <h3>사원목록</h3>
 <form name="searchfrm"> <!-- action 없으면 조건을 가지고 현재페이지 다시 부르는거. -->
 	<input name="p" value="1" type="hidden">
@@ -15,7 +15,15 @@
 				<option value="">전체 </option>
 				<option value="10">Administration
 				<option value="20">Marketing
+				<option value="30">Purchasing
 				<option value="50">Shipping
+				<option value="60">IT
+				<option value="70">Public Relations
+				<option value="80">Sales
+				<option value="90">Executive
+				<option value="100">Finance
+				<option value="110">Accounting
+				<option value="190">Contracting
 			</select>
 	이름: <input name="first_name">
 	<button>검색</button>

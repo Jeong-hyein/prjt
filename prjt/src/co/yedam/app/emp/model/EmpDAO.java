@@ -224,12 +224,28 @@ public class EmpDAO {
 	}
 	
 	//전체건수
-	public int getCount() {
+	public int getCount(String department_id, String first_name) {
 		int cnt = 0;
 		try {
-			String sql = "select count(*) as cnt from hr.employees";
 			conn = ConnectionManager.getConnnect();
+			String strWhere = "where 1 = 1"; //조건이 있던없던 true
+			if(department_id != null && !department_id.isEmpty()) {
+				strWhere += " and department_id = ?";  //where뒤에 and가 붙는다
+			}
+			if(first_name != null && ! first_name.isEmpty()) {
+				strWhere += " and first_name like '%' || ? || '%' " ;
+			}
+			String sql = "select count(*) as cnt from hr.employees" + strWhere;
 			pstmt = conn.prepareStatement(sql);
+			
+			int post = 1;
+			if(department_id != null && !department_id.isEmpty()) {
+				pstmt.setString(post++, department_id); //1넣고 나서 1을 더한다: post++
+			}
+			if(first_name != null && !first_name.isEmpty()) {
+				pstmt.setString(post++, first_name);
+			}
+			
 			rs = pstmt.executeQuery();
 			if(rs.next()) {
 				cnt = rs.getInt("cnt"); //컬럼명을 주거나, 인덱스를 주거나(1)

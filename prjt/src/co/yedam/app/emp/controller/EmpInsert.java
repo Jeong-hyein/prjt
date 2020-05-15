@@ -31,10 +31,10 @@ public class EmpInsert extends HttpServlet {
 		List<DeptVO> deptList = DeptDAO.getInstance().selectAll();
 		request.setAttribute("deptList", deptList);
 		//manager(emp)
-		List<EmpVO> magList = EmpDAO.getInstance().selectAll();
+		List<EmpVO> magList = EmpDAO.getInstance().selectAll(1,100,null,null);
 		request.setAttribute("magList", magList);
 		
-		request.getRequestDispatcher("emp/empInsert.jsp")
+		request.getRequestDispatcher("/emp/empInsert.jsp")
 				.forward(request, response);
 		
 	}

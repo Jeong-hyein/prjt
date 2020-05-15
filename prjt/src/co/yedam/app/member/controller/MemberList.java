@@ -1,4 +1,4 @@
-package co.yedam.app.emp.controller;
+package co.yedam.app.member.controller;
 
 import java.io.IOException;
 import java.util.List;
@@ -10,21 +10,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import co.yedam.app.common.Paging;
-import co.yedam.app.emp.model.EmpDAO;
 import co.yedam.app.emp.model.EmpVO;
+import co.yedam.app.member.model.MemberDAO;
+import co.yedam.app.member.model.MemberVO;
 
 
-@WebServlet("/EmpList.do")
-public class EmpList extends HttpServlet {
+@WebServlet("/MemberList.do")
+public class MemberList extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-
+ 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		EmpDAO dao = new EmpDAO();
+		MemberDAO dao = new MemberDAO();
 		
-		String department_id = request.getParameter("department_id");
-		String first_name = request.getParameter("first_name");
-		
+		String name = request.getParameter("name");
 		//1. 파라미터
 		
 		//페이징 처리(추가로 들어간거)
@@ -40,8 +38,8 @@ public class EmpList extends HttpServlet {
 		paging.setPageUnit(5);	 	//한페이지에 출력할 레코드 건수, 생략시 10(디폴트가 10),(옵션: 생략가능)
 		paging.setPageSize(3);		//한페이지 출력할 페이지 번호 수(옵션: 생략가능) 
 		paging.setPage(p);			//현재페이지(필수)
-//		paging.setTotalRecord(140); //전체 레코드 건수 조회(필수), 밑에꺼랑 같음
-		paging.setTotalRecord(dao.getCount(department_id,first_name));
+//		paging.setTotalRecord(50); //전체 레코드 건수 조회(필수)
+		paging.setTotalRecord(dao.getCount(name));
 		request.setAttribute("paging", paging);
 		
 		
@@ -50,13 +48,13 @@ public class EmpList extends HttpServlet {
 		int start = paging.getFirst();
 		int end = paging.getLast();
 		
-
-		List<EmpVO> list = dao.selectAll(start, end, department_id, first_name);
+		List<MemberVO> list = dao.getMemberList(start, end, name);
 		
 		//3.결과 출력(out.print) or 결과저장해서 view forward
 		request.setAttribute("list", list);
-		request.getRequestDispatcher("/emp/empList.jsp")
+		request.getRequestDispatcher("/member/memberList.jsp")
 				.forward(request, response);
+		
 	}
 
 
