@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>boardList.jsp</title>
+<title>prjt/boardList.jsp</title>
 <jsp:include page ="/common/header.jsp" />
 <div><a href="BoardInsert.do">게시판등록</a></div>
 <h3>게시판 목록</h3>
