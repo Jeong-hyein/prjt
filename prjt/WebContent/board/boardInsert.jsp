@@ -4,6 +4,7 @@
 <html>
 <head>
 <title>boardInsert</title>
+
 <jsp:include page ="/common/header.jsp" />
 
 <h1>게시판등록페이지</h1>
